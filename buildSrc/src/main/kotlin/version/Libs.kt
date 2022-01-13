@@ -15,7 +15,7 @@ object Libs {
     const val material = "com.google.android.material:material:$materialVersion"
 
     private const val constraintLayoutVersion = "2.1.2"
-    const val constraintLayout = "androidx.constraintlayout:$constraintLayoutVersion"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
     private const val jUnitVersion = "4.13.2"
     const val jUnit = "junit:junit:$jUnitVersion"
