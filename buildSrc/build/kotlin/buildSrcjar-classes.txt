@@ -1,1 +1,0 @@
-C:\Users\Walter\AndroidStudioProjects\GithubRepositories\buildSrc\build\classes\kotlin\main\version\Libs.class
