@@ -38,7 +38,16 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.constraintLayout)
     implementation(Libs.retrofit)
+    implementation(Libs.koinCore)
+    implementation(Libs.koinAndroid)
+    implementation(Libs.moshi)
+    implementation(Libs.retrofitConverterMoshi)
+    implementation(Libs.navigationFragment)
+    implementation(Libs.navigationUi)
+
     testImplementation(Libs.jUnit)
+    testImplementation(Libs.koinTest)
+
     androidTestImplementation(Libs.testJUnit)
     androidTestImplementation(Libs.espressoCore)
 }
