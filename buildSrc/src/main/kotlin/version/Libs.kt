@@ -42,4 +42,7 @@ object Libs {
     private const val navVersion = "2.3.5"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navVersion"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navVersion"
+
+    private const val pagingVersion = "3.1.0"
+    const val pagingRuntime = "androidx.paging:paging-runtime:$pagingVersion"
 }

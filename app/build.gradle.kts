@@ -1,4 +1,5 @@
 import version.Libs
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -30,6 +31,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    viewBinding {
+        isEnabled = true
+    }
 }
 
 dependencies {
@@ -44,6 +49,7 @@ dependencies {
     implementation(Libs.retrofitConverterMoshi)
     implementation(Libs.navigationFragment)
     implementation(Libs.navigationUi)
+    implementation(Libs.pagingRuntime)
 
     testImplementation(Libs.jUnit)
     testImplementation(Libs.koinTest)
