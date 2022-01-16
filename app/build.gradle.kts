@@ -3,6 +3,7 @@ import version.Libs
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -21,12 +22,15 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -43,13 +47,15 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.constraintLayout)
     implementation(Libs.retrofit)
-    implementation(Libs.koinCore)
     implementation(Libs.koinAndroid)
-    implementation(Libs.moshi)
-    implementation(Libs.retrofitConverterMoshi)
     implementation(Libs.navigationFragment)
     implementation(Libs.navigationUi)
     implementation(Libs.pagingRuntime)
+    implementation(Libs.okHttp3LoggingInterceptor)
+
+    implementation("io.coil-kt:coil:1.4.0")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.squareup.retrofit2:converter-gson:2.8.1")
 
     testImplementation(Libs.jUnit)
     testImplementation(Libs.koinTest)

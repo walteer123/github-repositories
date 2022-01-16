@@ -8,7 +8,9 @@ interface GithubService {
 
     @GET("search/repositories")
     suspend fun getGithubRepositories(
-        @Query("q") query: String = "language:kotlin",
-        @Query("page") page: Int
+        @Query("q") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") loadSize: Int,
+        @Query("sort") sort: String,
     ): GithubRepoResponseRemote
 }

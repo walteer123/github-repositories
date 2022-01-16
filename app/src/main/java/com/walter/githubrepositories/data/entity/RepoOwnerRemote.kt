@@ -1,8 +1,9 @@
 package com.walter.githubrepositories.data.entity
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+
 
 data class RepoOwnerRemote(
-    @field:Json(name = "login") val login: String,
-    @field:Json(name = "avatar_url") val avatarUrl: String,
+    @SerializedName("login") val login: String,
+    @SerializedName("avatar_url") val avatarUrl: String,
 )

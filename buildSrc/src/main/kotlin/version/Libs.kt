@@ -28,16 +28,8 @@ object Libs {
     const val espressoCore = "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 
     private const val koinVersion = "3.1.5"
-    const val koinCore = "io.insert-koin:koin-core:$koinVersion"
     const val koinAndroid = "io.insert-koin:koin-android:$koinVersion"
     const val koinTest = "io.insert-koin:koin-test:$koinVersion"
-
-    private const val moshiVersion = "1.13.0"
-    const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
-
-    private const val retrofitConverterMoshiVersion = "2.4.0"
-    const val retrofitConverterMoshi =
-        "com.squareup.retrofit2:converter-moshi:$retrofitConverterMoshiVersion"
 
     private const val navVersion = "2.3.5"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navVersion"
@@ -45,4 +37,7 @@ object Libs {
 
     private const val pagingVersion = "3.1.0"
     const val pagingRuntime = "androidx.paging:paging-runtime:$pagingVersion"
+
+    const val okHttp3LoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:3.8.0"
+
 }
