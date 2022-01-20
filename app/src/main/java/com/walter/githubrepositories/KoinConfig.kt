@@ -1,6 +1,8 @@
 package com.walter.githubrepositories
 
 import android.app.Application
+import com.walter.githubrepositories.di.dataModule
+import com.walter.githubrepositories.di.databaseModule
 import com.walter.githubrepositories.di.networkModule
 import com.walter.githubrepositories.di.presentationModule
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +20,9 @@ private val loadKoinModules by lazy {
     loadKoinModules(
         listOf(
             networkModule,
-            presentationModule
+            presentationModule,
+            databaseModule,
+            dataModule
         )
     )
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.walter.githubrepositories.databinding.FragmentGithubReposBinding
@@ -19,6 +20,8 @@ class GithubReposFragment : Fragment() {
 
     private val viewModel: GitHubReposViewModel by viewModel()
     private val listAdapter  by lazy { GitHubRepositoriesAdapter() }
+
+    @ExperimentalPagingApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +42,7 @@ class GithubReposFragment : Fragment() {
         }
     }
 
+    @ExperimentalPagingApi
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.reposDataFlow.collectLatest {

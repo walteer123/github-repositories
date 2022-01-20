@@ -57,9 +57,18 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.squareup.retrofit2:converter-gson:2.8.1")
 
+    implementation("androidx.room:room-runtime:2.4.1")
+    implementation("androidx.room:room-ktx:2.4.1")
+    implementation("androidx.room:room-paging:2.4.1")
+
+    kapt("androidx.room:room-compiler:2.4.1")
+
     testImplementation(Libs.jUnit)
     testImplementation(Libs.koinTest)
+    testImplementation(Libs.mockitoCore)
 
     androidTestImplementation(Libs.testJUnit)
     androidTestImplementation(Libs.espressoCore)
+    androidTestImplementation(Libs.testRunner)
+    androidTestImplementation(Libs.testRules)
 }

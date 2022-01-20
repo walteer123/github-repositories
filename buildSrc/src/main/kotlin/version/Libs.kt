@@ -40,4 +40,9 @@ object Libs {
 
     const val okHttp3LoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:3.8.0"
 
+    const val mockitoCore = "org.mockito:mockito-core:4.2.0"
+
+    const val testRunner = "androidx.test:runner:1.1.0"
+    const val testRules = "androidx.test:rules:1.1.0"
+
 }
