@@ -1,6 +1,7 @@
 package com.walter.githubrepositories.data.entity
 
 import com.google.gson.annotations.SerializedName
+import com.walter.githubrepositories.data.entity.local.GitHubRepoEntity
 import com.walter.githubrepositories.domain.entity.GitHubRepo
 
 data class GithubRepoRemote(
@@ -10,7 +11,7 @@ data class GithubRepoRemote(
     @SerializedName("forks_count") val totalForks: Int,
     @SerializedName("stargazers_count") val totalStars: Int
 ) {
-    fun transform() = GitHubRepo(
+    fun transform() = GitHubRepoEntity(
         id = id,
         name = name,
         authorName = owner.login,

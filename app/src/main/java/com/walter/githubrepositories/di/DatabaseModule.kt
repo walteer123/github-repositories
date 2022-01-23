@@ -11,7 +11,9 @@ val databaseModule = module {
             androidApplication(),
             GitHubRepoDatabase::class.java,
             "GitHubRepos.db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
     single { get<GitHubRepoDatabase>().getGitHubRepoDao() }
     single { get<GitHubRepoDatabase>().getKeysDao() }

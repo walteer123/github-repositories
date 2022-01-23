@@ -1,6 +1,6 @@
 package com.walter.githubrepositories.data.service
 
-import com.walter.githubrepositories.data.entity.GithubRepoResponseRemote
+import com.walter.githubrepositories.data.entity.GitHubRepoResponseRemote
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +12,5 @@ interface GithubService {
         @Query("page") page: Int?,
         @Query("per_page") loadSize: Int,
         @Query("sort") sort: String,
-    ): GithubRepoResponseRemote
+    ): GitHubRepoResponseRemote
 }

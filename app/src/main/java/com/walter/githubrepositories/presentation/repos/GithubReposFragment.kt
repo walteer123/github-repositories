@@ -45,7 +45,7 @@ class GithubReposFragment : Fragment() {
     @ExperimentalPagingApi
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.reposDataFlow.collectLatest {
+            viewModel.getReposFlow().collectLatest {
                 listAdapter.submitData(it)
             }
         }

@@ -12,15 +12,7 @@ import com.walter.githubrepositories.domain.repository.GitHubReposRepository
 class GitHubReposViewModel(private val repository: GitHubReposRepository) : ViewModel() {
 
     @ExperimentalPagingApi
-    val reposDataFlow = Pager(
-        config = PagingConfig(
-            pageSize = 30,
-            prefetchDistance = 10
-        ),
-        remoteMediator = GitHubRepoRemoteMediator()
-    ) {
-        repository.pagingSource
-    }.flow
+    fun getReposFlow() = repository.getGitHubRepoPagingFlow()
         .cachedIn(viewModelScope)
 
 }

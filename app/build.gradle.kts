@@ -66,6 +66,7 @@ dependencies {
     testImplementation(Libs.jUnit)
     testImplementation(Libs.koinTest)
     testImplementation(Libs.mockitoCore)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
 
     androidTestImplementation(Libs.testJUnit)
     androidTestImplementation(Libs.espressoCore)

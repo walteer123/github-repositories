@@ -7,6 +7,7 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.walter.githubrepositories.data.entity.GitQueryLanguage
 import com.walter.githubrepositories.data.entity.GitSortType
+import com.walter.githubrepositories.data.entity.local.GitHubRepoEntity
 import com.walter.githubrepositories.data.entity.local.RemoteKey
 import com.walter.githubrepositories.data.service.GithubService
 import com.walter.githubrepositories.database.GitHubRepoDatabase
@@ -15,7 +16,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 @ExperimentalPagingApi
-class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepo>(), KoinComponent {
+class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepoEntity>(), KoinComponent {
 
     private val service: GithubService by inject()
     private val db: GitHubRepoDatabase by inject()
@@ -26,7 +27,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepo>(), KoinComponen
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, GitHubRepo>
+        state: PagingState<Int, GitHubRepoEntity>
     ): MediatorResult {
         return try {
             val loadKey = getKeyPageData(loadType, state)
@@ -78,7 +79,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepo>(), KoinComponen
         }
     }
 
-    private suspend fun getClosestKey(state: PagingState<Int, GitHubRepo>): RemoteKey? {
+    private suspend fun getClosestKey(state: PagingState<Int, GitHubRepoEntity>): RemoteKey? {
         return state?.anchorPosition?.let {
             state?.closestItemToPosition(it)?.run {
                 db.getKeysDao().remoteKeysRepoId(id)
@@ -86,7 +87,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepo>(), KoinComponen
         }
     }
 
-    private suspend fun getLastKey(state: PagingState<Int, GitHubRepo>): RemoteKey? {
+    private suspend fun getLastKey(state: PagingState<Int, GitHubRepoEntity>): RemoteKey? {
         state.pages
         return state.pages
             .lastOrNull { it.data.isNotEmpty() }
@@ -96,7 +97,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepo>(), KoinComponen
             }
     }
 
-    private suspend fun getFirstRemoteKey(state: PagingState<Int, GitHubRepo>): RemoteKey? {
+    private suspend fun getFirstRemoteKey(state: PagingState<Int, GitHubRepoEntity>): RemoteKey? {
         return state.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()
@@ -105,7 +106,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepo>(), KoinComponen
 
     private suspend fun getKeyPageData(
         loadType: LoadType,
-        state: PagingState<Int, GitHubRepo>
+        state: PagingState<Int, GitHubRepoEntity>
     ): Any {
         return when (loadType) {
             LoadType.REFRESH -> {
