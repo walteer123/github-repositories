@@ -20,13 +20,7 @@ object Libs {
 
     private const val jUnitVersion = "4.13.2"
     const val jUnit = "junit:junit:$jUnitVersion"
-
-    private const val testJUnitVersion = "1.1.3"
-    const val testJUnit = "androidx.test.ext:junit:$testJUnitVersion"
-
-    private const val espressoCoreVersion = "3.4.0"
-    const val espressoCore = "androidx.test.espresso:espresso-core:$espressoCoreVersion"
-
+    
     private const val koinVersion = "3.1.5"
     const val koinAndroid = "io.insert-koin:koin-android:$koinVersion"
     const val koinTest = "io.insert-koin:koin-test:$koinVersion"
@@ -42,7 +36,18 @@ object Libs {
 
     const val mockitoCore = "org.mockito:mockito-core:4.2.0"
 
-    const val testRunner = "androidx.test:runner:1.1.0"
     const val testRules = "androidx.test:rules:1.1.0"
+
+    const val coil = "io.coil-kt:coil:1.4.0"
+    const val gson = "com.google.code.gson:gson:2.8.9"
+    const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:2.8.1"
+
+    const val roomRuntime = "androidx.room:room-runtime:2.4.1"
+    const val roomKtx = "androidx.room:room-ktx:2.4.1"
+    const val roomPaging = "androidx.room:room-paging:2.4.1"
+    const val roomCompiler = "androidx.room:room-compiler:2.4.1"
+
+    const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+    const val turbine = "app.cash.turbine:turbine:0.7.0"
 
 }

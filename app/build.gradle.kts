@@ -53,24 +53,19 @@ dependencies {
     implementation(Libs.pagingRuntime)
     implementation(Libs.okHttp3LoggingInterceptor)
 
-    implementation("io.coil-kt:coil:1.4.0")
-    implementation("com.google.code.gson:gson:2.8.9")
-    implementation("com.squareup.retrofit2:converter-gson:2.8.1")
+    implementation(Libs.coil)
+    implementation(Libs.gson)
+    implementation(Libs.retrofitGsonConverter)
 
-    implementation("androidx.room:room-runtime:2.4.1")
-    implementation("androidx.room:room-ktx:2.4.1")
-    implementation("androidx.room:room-paging:2.4.1")
+    implementation(Libs.roomRuntime)
+    implementation(Libs.roomKtx)
+    implementation(Libs.roomPaging)
 
-    kapt("androidx.room:room-compiler:2.4.1")
+    kapt(Libs.roomCompiler)
 
     testImplementation(Libs.jUnit)
     testImplementation(Libs.koinTest)
     testImplementation(Libs.mockitoCore)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
-    testImplementation("app.cash.turbine:turbine:0.7.0")
-
-    androidTestImplementation(Libs.testJUnit)
-    androidTestImplementation(Libs.espressoCore)
-    androidTestImplementation(Libs.testRunner)
-    androidTestImplementation(Libs.testRules)
+    testImplementation(Libs.coroutinesTest)
+    testImplementation(Libs.turbine)
 }
