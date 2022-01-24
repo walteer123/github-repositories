@@ -67,6 +67,7 @@ dependencies {
     testImplementation(Libs.koinTest)
     testImplementation(Libs.mockitoCore)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation("app.cash.turbine:turbine:0.7.0")
 
     androidTestImplementation(Libs.testJUnit)
     androidTestImplementation(Libs.espressoCore)

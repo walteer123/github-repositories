@@ -4,14 +4,13 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
 import com.walter.githubrepositories.data.entity.GitQueryLanguage
 import com.walter.githubrepositories.data.entity.GitSortType
 import com.walter.githubrepositories.data.entity.local.GitHubRepoEntity
 import com.walter.githubrepositories.data.entity.local.RemoteKey
+import com.walter.githubrepositories.data.service.GitHubRepoDao
 import com.walter.githubrepositories.data.service.GithubService
-import com.walter.githubrepositories.database.GitHubRepoDatabase
-import com.walter.githubrepositories.domain.entity.GitHubRepo
+import com.walter.githubrepositories.data.service.RemoteKeyDao
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -19,7 +18,8 @@ import org.koin.core.component.inject
 class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepoEntity>(), KoinComponent {
 
     private val service: GithubService by inject()
-    private val db: GitHubRepoDatabase by inject()
+    private val keyDao: RemoteKeyDao by inject()
+    private val repoDao: GitHubRepoDao by inject()
 
     override suspend fun initialize(): InitializeAction {
         return InitializeAction.LAUNCH_INITIAL_REFRESH
@@ -51,27 +51,25 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepoEntity>(), KoinCo
             val endOfList = data.isEmpty()
 
             if (loadType == LoadType.REFRESH) {
-                db.withTransaction {
-                    db.getKeysDao().deleteAll()
-                    db.getGitHubRepoDao().deleteAllRepos()
-                }
+                keyDao.deleteAll()
+                repoDao.deleteAllRepos()
             }
 
             val prev = if (page == 0) null else page - 1
             val next = if (endOfList) null else page + 1
 
-            db.withTransaction {
-                val remoteKeys = data.map { repo ->
-                    RemoteKey(
-                        repoId = repo.id,
-                        prevKey = prev,
-                        nextKey = next
-                    )
-                }
 
-                db.getKeysDao().insertAll(remoteKeys)
-                db.getGitHubRepoDao().insertAllRepos(data)
+            val remoteKeys = data.map { repo ->
+                RemoteKey(
+                    repoId = repo.id,
+                    prevKey = prev,
+                    nextKey = next
+                )
             }
+
+            keyDao.insertAll(remoteKeys)
+            repoDao.insertAllRepos(data)
+
 
             return MediatorResult.Success(endOfPaginationReached = endOfList)
         } catch (exception: Exception) {
@@ -82,7 +80,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepoEntity>(), KoinCo
     private suspend fun getClosestKey(state: PagingState<Int, GitHubRepoEntity>): RemoteKey? {
         return state?.anchorPosition?.let {
             state?.closestItemToPosition(it)?.run {
-                db.getKeysDao().remoteKeysRepoId(id)
+                keyDao.remoteKeysRepoId(id)
             }
         }
     }
@@ -93,7 +91,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepoEntity>(), KoinCo
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
             ?.run {
-                db.getKeysDao().remoteKeysRepoId(id)
+                keyDao.remoteKeysRepoId(id)
             }
     }
 
@@ -101,7 +99,7 @@ class GitHubRepoRemoteMediator : RemoteMediator<Int, GitHubRepoEntity>(), KoinCo
         return state.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()
-            ?.run { db.getKeysDao().remoteKeysRepoId(id) }
+            ?.run { keyDao.remoteKeysRepoId(id) }
     }
 
     private suspend fun getKeyPageData(

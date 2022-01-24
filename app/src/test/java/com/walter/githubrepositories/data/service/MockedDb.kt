@@ -4,33 +4,14 @@ import androidx.paging.PagingSource
 import androidx.room.DatabaseConfiguration
 import androidx.room.InvalidationTracker
 import androidx.sqlite.db.SupportSQLiteOpenHelper
+import com.walter.githubrepositories.data.entity.local.GitHubRepoEntity
 import com.walter.githubrepositories.data.entity.local.RemoteKey
+import com.walter.githubrepositories.data.repository.MockedPagingSource
 import com.walter.githubrepositories.database.GitHubRepoDatabase
 import com.walter.githubrepositories.domain.entity.GitHubRepo
+import kotlinx.coroutines.Dispatchers
 
-class MockedDb : GitHubRepoDatabase() {
-    override fun getKeysDao(): RemoteKeyDao {
-        return MockedKeysDao()
-    }
-
-    override fun getGitHubRepoDao(): GitHubRepoDao {
-        TODO("Not yet implemented")
-    }
-
-    override fun createOpenHelper(config: DatabaseConfiguration?): SupportSQLiteOpenHelper {
-       return super.getOpenHelper()
-    }
-
-    override fun createInvalidationTracker(): InvalidationTracker {
-        return super.getInvalidationTracker()
-    }
-
-    override fun clearAllTables() {
-
-    }
-}
-
-class MockedKeysDao() : RemoteKeyDao {
+class MockedKeysDao : RemoteKeyDao {
     override suspend fun insertAll(remoteKey: List<RemoteKey>) {
 
     }
@@ -49,15 +30,15 @@ class MockedKeysDao() : RemoteKeyDao {
 }
 
 class MockedGitHubRepoDao: GitHubRepoDao {
-    override fun getAllRepos(): PagingSource<Int, GitHubRepo> {
-        TODO("Not yet implemented")
+    override fun getAllRepos(): PagingSource<Int, GitHubRepoEntity> {
+        return MockedPagingSource(Dispatchers.IO)
     }
 
     override fun deleteAllRepos() {
-        TODO("Not yet implemented")
+
     }
 
-    override fun insertAllRepos(repos: List<GitHubRepo>) {
-        TODO("Not yet implemented")
+    override fun insertAllRepos(repos: List<GitHubRepoEntity>) {
+
     }
 }
